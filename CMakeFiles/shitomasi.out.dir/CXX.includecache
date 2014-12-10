@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vchoutas/Programming/camera_basics/features/shi-tomashi_corners.cpp
+opencv2/highgui/highgui.hpp
+/home/vchoutas/Programming/camera_basics/features/opencv2/highgui/highgui.hpp
+opencv2/imgproc/imgproc.hpp
+/home/vchoutas/Programming/camera_basics/features/opencv2/imgproc/imgproc.hpp
+iostream
+-
+stdio.h
+-
+stdlib.h
+-
+

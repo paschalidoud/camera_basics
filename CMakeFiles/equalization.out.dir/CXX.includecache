@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vchoutas/Programming/camera_basics/histograms/equalization.cpp
+opencv2/opencv.hpp
+-
+iostream
+-
+stdio.h
+-
+

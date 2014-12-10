@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vchoutas/Programming/camera_basics/edges.cpp
+iostream
+-
+string
+-
+opencv/cv.h
+/home/vchoutas/Programming/camera_basics/opencv/cv.h
+opencv/highgui.h
+/home/vchoutas/Programming/camera_basics/opencv/highgui.h
+

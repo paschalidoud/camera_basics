@@ -80,7 +80,7 @@ int main( int argc, char** argv )
   }
 
   /// Display
- 
+  cv::imshow("Pattern",src);
   cv::imshow("calcHist Demo", histImage );
   cv::waitKey(0);
 

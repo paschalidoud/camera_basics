@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vchoutas/Programming/camera_basics/histograms/backprojection.cpp
+opencv2/imgproc/imgproc.hpp
+/home/vchoutas/Programming/camera_basics/histograms/opencv2/imgproc/imgproc.hpp
+opencv2/highgui/highgui.hpp
+/home/vchoutas/Programming/camera_basics/histograms/opencv2/highgui/highgui.hpp
+iostream
+-
+

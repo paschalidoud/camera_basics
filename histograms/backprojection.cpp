@@ -17,13 +17,11 @@ void Hist_and_Backproj(int, void* );
 int main( int argc, char** argv )
 {
   /// Read the image
-  int main(int argc , char* argv[] )
-{
   std::string pattern("pattern.png");
   /// Load source image and convert it to gray
   if ( argc < 1 )
   {
-    std::cout << " Usage : ./harris.out image_name" << std::endl;
+    std::cout << " Usage : ./backprojection.out image_name" << std::endl;
     std::cout << " Loading default image ! " << std::endl;
   }
   else
