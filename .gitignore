@@ -38,10 +38,10 @@
 # Makefiles
 Makefile
 *.cmake
+CMakeFiles
 
 # Python
 *.pyc
 .ropeproject/
 
-# Images
-*.png
+
