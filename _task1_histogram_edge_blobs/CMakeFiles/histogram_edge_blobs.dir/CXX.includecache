@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/v/opencv/opencv/samples/vision_tasks/camera_basics/_task1_histogram_edge_blobs/histogram_edge_blobs.cpp
+opencv2/imgproc/imgproc.hpp
+/home/v/opencv/opencv/samples/vision_tasks/camera_basics/_task1_histogram_edge_blobs/opencv2/imgproc/imgproc.hpp
+opencv2/highgui/highgui.hpp
+/home/v/opencv/opencv/samples/vision_tasks/camera_basics/_task1_histogram_edge_blobs/opencv2/highgui/highgui.hpp
+include/histogram_edge_blobs.h
+/home/v/opencv/opencv/samples/vision_tasks/camera_basics/_task1_histogram_edge_blobs/include/histogram_edge_blobs.h
+stdio.h
+-
+iostream
+-
+
+/home/v/opencv/opencv/samples/vision_tasks/camera_basics/_task1_histogram_edge_blobs/include/histogram_edge_blobs.h
+opencv2/imgproc/imgproc.hpp
+/home/v/opencv/opencv/samples/vision_tasks/camera_basics/_task1_histogram_edge_blobs/include/opencv2/imgproc/imgproc.hpp
+opencv2/highgui/highgui.hpp
+/home/v/opencv/opencv/samples/vision_tasks/camera_basics/_task1_histogram_edge_blobs/include/opencv2/highgui/highgui.hpp
+stdio.h
+-
+iostream
+-
+
