@@ -54,6 +54,7 @@ void calcHistogram(const cv::Mat& _in_image)
     cv::waitKey(0);
 }
 
+
 void calcBackProjection( const cv::Mat _in_image1, const cv::Mat _in_image2)
 {
     cv::VideoCapture camera( 1 );
