@@ -1,8 +1,4 @@
-#include "opencv2/imgproc/imgproc.hpp"
-#include "opencv2/highgui/highgui.hpp"
 #include "include/histogram_edge_blobs.h"
-#include <stdio.h>
-#include <iostream>
 
 using namespace std;
 using namespace cv;
@@ -133,5 +129,32 @@ void detectEdges( cv::Mat& _in_image )
     _in_image.copyTo( _dst, _dst_image);
     cv::namedWindow("Edges", CV_WINDOW_AUTOSIZE);
     cv:imshow( "Edges", _dst);
-    
+    detectBlobs( _dst );
 }
+
+void detectBlobs( cv::Mat& _in_image )
+{
+    //define parameters
+    cv::SimpleBlobDetector::Params params;
+    params.minDistBetweenBlobs = 50.0f;
+    params.filterByColor = false;
+    params.filterByArea = true;
+    params.filterByCircularity = false;
+    params.filterByInertia = false;
+    params.filterByConvexity= false;
+    params.minArea = 20.0f;
+    params.maxArea = 500.0f;
+    //create the detector with the above params
+    cv::Ptr<cv::FeatureDetector> _blob_detector = new cv::SimpleBlobDetector(params);
+    _blob_detector->create("SimpleBlob");
+    //detect and extract coordinates of keypoints
+    vector<cv::KeyPoint> _keypoints;
+    _blob_detector->detect(_in_image, _keypoints);
+    for (int i=0; i<_keypoints.size(); i++)
+    {
+        float _x = _keypoints[i].pt.x;
+        float _y = _keypoints[i].pt.y;
+        printf( "X: %f, Y: %f",_x, _y );
+    }
+
+}  
