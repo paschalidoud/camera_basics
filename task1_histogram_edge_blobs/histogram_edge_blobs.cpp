@@ -57,7 +57,7 @@ void calcHistogram(const cv::Mat& _in_image)
 
 void calcBackProjection( const cv::Mat _in_image1, const cv::Mat _in_image2)
 {
-    cv::VideoCapture camera( 1 );
+    cv::VideoCapture camera( 0 );
     cv::Mat frame;
     cv::Mat _dest_img;
     cv::Mat _hsv_img, _hsv_dest_img;
@@ -111,7 +111,27 @@ void calcBackProjection( const cv::Mat _in_image1, const cv::Mat _in_image2)
         cv::calcBackProject( &_hue_dest_ch, 1, 0, _hist, _backproj, &_ranges, 1, true );
        /// Draw the backproj
        cv::imshow( "BackProj", _backproj );
+       detectEdges( _backproj );
        if( cv::waitKey(10)>10 ) break;
     }
 
+}
+
+void detectEdges( cv::Mat& _in_image )
+{
+    cv::Mat _dst_image;
+    cv::Mat _dst;
+    int _threshold_low = 10;
+    int _ratio = 3;
+    float _sigma = 1;
+    //blur to reduce noise
+    cv::GaussianBlur(_in_image, _dst_image, Size(5,5), _sigma, 0, BORDER_DEFAULT);
+    //use canny
+    cv::Canny(_dst_image, _dst_image, _threshold_low, _ratio*_threshold_low);
+    //transform angles to pixels densities using canny's output as a mask
+    _dst = Scalar::all(0);
+    _in_image.copyTo( _dst, _dst_image);
+    cv::namedWindow("Edges", CV_WINDOW_AUTOSIZE);
+    cv:imshow( "Edges", _dst);
+    
 }
