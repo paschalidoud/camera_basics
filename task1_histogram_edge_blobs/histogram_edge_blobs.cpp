@@ -5,14 +5,19 @@ using namespace cv;
 
 int main( int argc, char** argv )
 {
-    cv::Mat _in_image1;
-    std::string _input_image1("../walls/0.png");
-    _in_image1 = cv::imread(_input_image1, 1);
-    cv::Mat _in_image2;
-    std::string _input_image2("../walls/1.png");
-    _in_image2 = cv::imread(_input_image2, 1);
+    std::vector<cv::Mat> _in_images(7);
+    std::stringstream _img_name;
+    for( int i=0; i<_in_images.size(); i++ ){
+        _img_name << "../walls/" << i << ".png";
+        _in_images[i] = cv::imread(_img_name.str());
+        _img_name.str("");
+    	//cv::Mat _in_img;
+	//std::string _input_img("../walls/1.png");
+        //_in_image2 = cv::imread(_input_image2, 1);
+        
+    }
     //calcHistogram(_in_image);
-    calcBackProjection(_in_image1, _in_image2);
+    calcBackProjection( _in_images );
 //    detectEdges(_in_image);
 //    detectBlobs(_in_image);
       
@@ -51,10 +56,11 @@ void calcHistogram(const cv::Mat& _in_image)
 }
 
 
-void calcBackProjection( const cv::Mat _in_image1, const cv::Mat _in_image2)
+void calcBackProjection( const std::vector<cv::Mat>& _in_images )
 {
-    cv::VideoCapture camera( 0 );
+    cv::VideoCapture camera( 1 );
     cv::Mat frame;
+    cv::Mat _in_image1;
     cv::Mat _dest_img;
     cv::Mat _hsv_img, _hsv_dest_img;
     cv::Mat _hue_ch, _hue_dest_ch;
@@ -64,21 +70,18 @@ void calcBackProjection( const cv::Mat _in_image1, const cv::Mat _in_image2)
     int _hist_sizes = 128;
     float _hue_range[] = {0, 180};
     const float* _ranges = { _hue_range };
-    cv::cvtColor( _in_image1, _hsv_img, CV_BGR2HSV);
-    //extract and use only the hue value
-    _hue_ch.create( _hsv_img.size(), _hsv_img.depth() );
     int ch[] = { 0, 0};
-    cv::mixChannels( &_hsv_img, 1, &_hue_ch, 1, ch, 1);
-    /// Get the Histogram and normalize it(accumulate)
-    cv::calcHist( &_hue_ch, 1, 0, cv::Mat(), _hist, 1, &_hist_sizes, &_ranges, true, true );
-    cv::normalize( _hist, _hist, 0, 255, NORM_MINMAX, -1, cv::Mat() );
-    cv::cvtColor( _in_image2, _hsv_img, CV_BGR2HSV);
-    //extract and use only the hue value
-    _hue_ch.create( _hsv_img.size(), _hsv_img.depth() );
-    cv::mixChannels( &_hsv_img, 1, &_hue_ch, 1, ch, 1);
-    /// Get the Histogram and normalize it (accumulate)
-    cv::calcHist( &_hue_ch, 1, 0, cv::Mat(), _hist, 1, &_hist_sizes, &_ranges, true, true );
-    cv::normalize( _hist, _hist, 0, 255, NORM_MINMAX, -1, cv::Mat() );
+    for( int i = 0; i < _in_images.size(); i++ )
+    {
+            //_in_image1 = _in_images[i]; 
+	    cv::cvtColor( _in_images[i], _hsv_img, CV_BGR2HSV);
+	    //extract and use only the hue value
+	    _hue_ch.create( _hsv_img.size(), _hsv_img.depth() );
+	    cv::mixChannels( &_hsv_img, 1, &_hue_ch, 1, ch, 1);
+	    /// Get the Histogram and normalize it(accumulate)
+	    cv::calcHist( &_hue_ch, 1, 0, cv::Mat(), _hist, 1, &_hist_sizes, &_ranges, true, true );
+	    cv::normalize( _hist, _hist, 0, 255, NORM_MINMAX, -1, cv::Mat() );
+    }
 
     /// Draw the histogram
     cv::MatND _hist_img;
@@ -154,7 +157,7 @@ void detectBlobs( cv::Mat& _in_image )
     {
         float _x = _keypoints[i].pt.x;
         float _y = _keypoints[i].pt.y;
-        printf( "X: %f, Y: %f",_x, _y );
+        printf( "X: %f, Y: %f/n",_x, _y );
     }
 
 }  
