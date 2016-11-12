@@ -11,11 +11,11 @@ while(1):
 
     # Our operations on the frame come here
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    hsv= cv2.cvtColor (frame,cv2.COLOR_BGR2HSV)
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     # Display the resulting frame
-    cv2.imshow('BGR colorspace',frame)
-    cv2.imshow('GRAY colorspace',gray)
-    cv2.imshow('HSV colorspace',hsv)
+    cv2.imshow('BGR colorspace', frame)
+    cv2.imshow('GRAY colorspace', gray)
+    cv2.imshow('HSV colorspace', hsv)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 

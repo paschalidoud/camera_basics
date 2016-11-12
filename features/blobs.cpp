@@ -30,48 +30,43 @@ void blobDetect(cv::Mat srcimage, cv::Mat* out)
   params.filterByColor = false;
   params.filterByCircularity = true;
  
-  cv::SimpleBlobDetector blobDetector( params );
+  cv::SimpleBlobDetector blobDetector(params);
   blobDetector.create("SimpleBlob");
 
-  blobDetector.detect( srcimage, keyPoints );
-        //blobDetector.detectEx( src, keyPoints, contours );
-  cv::drawKeypoints( srcimage, keyPoints, *out, CV_RGB(0,255,255), cv::DrawMatchesFlags::DEFAULT);
-  approxContours.resize( contours.size() );
+  blobDetector.detect(srcimage, keyPoints);
+  cv::drawKeypoints(srcimage, keyPoints, *out, CV_RGB(0,255,255), cv::DrawMatchesFlags::DEFAULT);
+  approxContours.resize(contours.size());
 
-  for( int i = 0; i < contours.size(); ++i )
-  {
-    cv::approxPolyDP( cv::Mat(contours[i]), approxContours[i], 4, 1 );
-    cv::drawContours( *out, contours, i, CV_RGB(255,0,255));
-    cv::drawContours( *out, approxContours, i, CV_RGB(255,0,255));
+  for (int i = 0; i < contours.size(); ++i) {
+    cv::approxPolyDP(cv::Mat(contours[i]), approxContours[i], 4, 1);
+    cv::drawContours(*out, contours, i, CV_RGB(255,0,255));
+    cv::drawContours(*out, approxContours, i, CV_RGB(255,0,255));
   }
 }
 
-int main( int argc,char* argv[] )
-{
-  //!< In this variable the current frame is stored
-  cv::Mat frame;
-  int cam;
-  if ( argc <= 1)
-  {
-    std::cout << "Usage : ./camera CAM_NUM" << std::endl;
-    std::cout << "CAM_NUM is the camera we wish to open!" << std::endl;
-    std::cout << "Default Laptop Camera will be opened!" << std::endl;
-    cam = 0;
-  }
-  else
-    cam = atoi(argv[1]);
-  
+int main (int argc,char* argv[]){
+    //!< In this variable the current frame is stored
+    cv::Mat frame;
+    int cam;
+    if (argc <= 1) {
+        std::cout << "Usage : ./camera CAM_NUM" << std::endl;
+        std::cout << "CAM_NUM is the camera we wish to open!" << std::endl;
+        std::cout << "Default Laptop Camera will be opened!" << std::endl;
+        cam = 0;
+    }
+    else
+        cam = atoi(argv[1]);
+
   cv::VideoCapture camera(1);
-  if ( !camera.isOpened() )  
-  {
+  if (!camera.isOpened()) {
     std::cout << "Cannot open the video file" << std::endl;
     return -1;
   }
-  while(1)
-  {
+
+  while (1) {
     camera.grab();
     camera.retrieve(frame);
-    cv::Mat blobs=cv::Mat::zeros(480,640,CV_8UC1);
+    cv::Mat blobs = cv::Mat::zeros(480, 640, CV_8UC1);
     blobDetect(frame, &blobs);
     cv::imshow("Current frame", frame);
     cv::imshow("Blobs frame", blobs);

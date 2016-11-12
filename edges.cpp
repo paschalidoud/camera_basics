@@ -9,7 +9,7 @@
   * @param[out] outImage [cv::Mat*] The processed image in CV_8UC1 format
   * @return void
   */
-void applySobel (const cv::Mat inImage, cv::Mat* outImage)
+void applySobel(const cv::Mat inImage, cv::Mat* outImage)
 {
     //!< appropriate values for scale, delta and ddepth
     int scale = 1;
@@ -69,12 +69,12 @@ void applyCanny(const cv::Mat& inImage, cv::Mat* outImage)
 }
 
 /**
-  * @brief applies the scharr edge transform
+  * @brief applies the Scharr edge transform
   * @param[in] inimage [const cv::mat&] input image in cv_8uc1 format
   * @param[out] outimage [cv::mat*] the processed image in cv_8uc1 format
   * @return void
   */
-void applyscharr (const cv::mat& inimage, cv::mat* outimage)
+void applyScharr(const cv::mat& inimage, cv::mat* outimage)
 {   
     //!< appropriate values for scale, delta and ddepth
     int scale = 1;
@@ -110,7 +110,7 @@ void applyscharr (const cv::mat& inimage, cv::mat* outimage)
   * @param[out] outImage [cv::Mat*] The processed image in CV_8UC1 format
   * @return void
   */
-void applyLaplacian (const cv::Mat& inImage, cv::Mat* outImage)
+void applyLaplacian(const cv::Mat& inImage, cv::Mat* outImage)
 {
     //!< appropriate values for scale, delta and ddepth
     int scale = 1;
@@ -149,19 +149,19 @@ int main(int argc,char* argv[] )
     cam = atoi(argv[1]);
 
   cv::VideoCapture camera(cam);
-  if (!camera.isOpened()){
+  if (!camera.isOpened()) {
     std::cout << "Cannot open the video file" << std::endl;
     return -1;
   }
   int KeyPressed=255; 
   int i=0;
-  std::cout<<"Press esc if you want to stop the process"<<std::endl;
+  std::cout << "Press esc if you want to stop the process" << std::endl;
 
   char state;
-  while(true) {
+  while (true) {
     camera.grab();
     camera.retrieve(frame);
-    cv::imshow("BGR colorspace",frame);
+    cv::imshow("BGR colorspace", frame);
 
     //!< Apply Sobel edge detections algorithm
     applySobel (frame, &sobel);
@@ -170,7 +170,7 @@ int main(int argc,char* argv[] )
     //!< Apply Canny edge detection algorithm
     cvtColor( frame, gray, CV_BGR2GRAY );
     applyCanny( gray, &canny);
-    cv::imshow("Canny algorithm",canny);
+    cv::imshow("Canny algorithm", canny);
 
     //!< Apply Scharr edge detection algorithm
     applyScharr (frame, &scharr);
@@ -189,7 +189,7 @@ int main(int argc,char* argv[] )
         break;
     }
 
-    if(exitVal) //!< KeyPressed==esc
+    if (exitVal) //!< KeyPressed==esc
         break;
   }
 }
